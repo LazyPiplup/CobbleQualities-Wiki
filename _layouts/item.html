@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="logo">
+            <div class="logo">
+              <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Site Logo" class="logo-img" style="width:64px; height:64px; border-radius:12px;";>
+              <div class="site-name">CQ Wiki</div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main">
+          {% assign menu = site.data.nav | default: site.nav %}
+          {% if menu %}
+            <ul>
+              {% for item in menu %}
+                <li class="nav-item">
+                  <a href="{{ item.url | relative_url }}">
+                    <span class="nav-label">{{ item.title }}</span>
+                  </a>
+                  {% if item.children %}
+                    <ul class="sub">
+                      {% for child in item.children %}
+                        <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="content-header">
+          <div style="display:flex; align-items:center; gap:24px; margin:20px 0 30px;">
+            {% if page.itemico %}
+              <img src="{{ page.itemico | relative_url }}" 
+                  alt="{{ page.title }} icon" 
+                  style="width:64px; height:64px; border-radius:12px; flex-shrink:0; box-shadow:0 4px 12px rgba(0,0,0,0.15); 
+                          image-rendering:pixelated;   /* this is the magic line */
+                          image-rendering:-moz-crisp-edges; 
+                          image-rendering:crisp-edges;">
+            {% endif %}
+            
+            <div>
+              <h1 style="margin:0; font-size:2.4rem;">{{ page.title }}</h1>
+              {% if page.type %}<p style="margin:4px 0 0; color:#666; font-size:1.1rem;">{{ page.type }} Item</p>{% endif %}
+            </div>
+          </div>
+        </header>
+
+        {{ page.description }}
+
+        <section class="content-body">
+          <h2>Obtaining</h2>
+          <div style="height:1px; background:rgba(255,255,255,0.04); margin:16px 0 24px;"></div>
+          <ul>
+            {% if page.recipe_image %}
+                <h3>Crafting:</h3>
+                <img src="{{ page.recipe_image | relative_url }}" alt="{{ page.title }} recipe" style="max-width:360px;border-radius:8px;">
+            {% endif %}
+
+            {% if page.drop_desc %}
+                <h3>Drop Source:</h3>
+                {{ page.drop_desc }}
+            {% endif %}
+
+            {% if page.loot_desc %}
+                <h3>Loot Source:</h3>
+                {{ page.loot_desc }}
+            {% endif %}
+          </ul>
+
+          {% if page.usage_desc %}
+                <h2>Usage:</h2>
+                <div style="height:1px; background:rgba(255,255,255,0.04); margin:16px 0 24px;"></div>
+                {{ page.usage_desc }}
+          {% endif %}
+        </section>
+
+        <footer class="site-footer">
+          <p><a href="{{ '/pages/items.html' | relative_url }}">← Back to items</a></p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

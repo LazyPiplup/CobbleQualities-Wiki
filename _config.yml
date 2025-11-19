@@ -1,0 +1,29 @@
+title: Cobblequalities Wiki
+description: "Local Jekyll wiki for editing and testing"
+baseurl:
+url: "http://localhost:4000"
+theme:
+paginate: 5
+
+collections:
+  items:
+    output: true
+    permalink: /items/:name/
+  commands:
+    output: true
+    permalink: /commands/:name/
+  configs:
+    output: true
+    permalink: /configs/:name/
+  gamerules:
+    output: true
+    permalink: /gamerules/:name/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+include:
+  - ".htaccess"
+
+plugins: [jekyll-paginate]

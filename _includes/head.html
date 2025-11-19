@@ -1,0 +1,29 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{{ page.title | default: site.title }}</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ '/css/main.css' | relative_url }}" />
+
+<!-- small search styles -->
+<style>
+/* search input container placed in header; small dropdown card */
+.search-wrap{position:relative;display:flex;align-items:center}
+.search-input{
+  min-width:260px;max-width:520px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.03);
+  padding:10px 12px;border-radius:8px;color:inherit;font-family:inherit;
+  outline:none;
+}
+.search-results{
+  position:absolute;left:0;right:0;margin-top:8px;background:var(--panel-bg);
+  border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.45);z-index:40;overflow:hidden;
+  display:none;max-height:360px;overflow:auto;
+}
+.search-results .result{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.02)}
+.search-results .result a{color:var(--accent-2);text-decoration:none;font-weight:600}
+.search-results .result p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.search-empty{padding:12px 14px;color:var(--muted)}
+@media (max-width:900px){ .search-input{min-width:160px} }
+</style>

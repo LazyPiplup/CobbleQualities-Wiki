@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="logo">
+            <div class="logo">
+              <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Site Logo" class="logo-img" style="width:64px; height:64px; border-radius:12px;";>
+              <div class="site-name">CQ Wiki</div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main">
+          {% assign menu = site.data.nav | default: site.nav %}
+          {% if menu %}
+            <ul>
+              {% for item in menu %}
+                <li class="nav-item">
+                  <a href="{{ item.url | relative_url }}">
+                    <span class="nav-label">{{ item.title }}</span>
+                  </a>
+                  {% if item.children %}
+                    <ul class="sub">
+                      {% for child in item.children %}
+                        <li><a href="{{ child.url | relative_url }}">{{ child.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </nav>
+      </aside>
+
+      <main class="content" role="main">
+        <header class="content-header">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <a class="crumb" href="{{ '/' | relative_url }}">🏠</a>
+            <div class="content-title">
+              <h1>{{ page.title | default: site.title }}</h1>
+              {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+            </div>
+          </div>
+        </header>
+
+        <section class="content-body">
+          {{ content }}
+        </section>
+
+        <footer class="site-footer">
+          <p>Content available under Creative Commons Attribution unless otherwise noted.</p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
